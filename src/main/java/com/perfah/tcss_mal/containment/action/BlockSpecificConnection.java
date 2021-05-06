@@ -1,6 +1,6 @@
 package com.perfah.tcss_mal.containment.action;
 
-import com.perfah.tcss_mal.containment.StructuralModifierAttribute;
+import com.perfah.tcss_mal.containment.ContainmentFlag;
 import com.perfah.tcss_mal.util.DefenseFlag;
 import com.perfah.tcss_mal.util.GraphUtil;
 import com.perfah.tcss_mal.util.Role;
@@ -33,7 +33,7 @@ public class BlockSpecificConnection extends ContainmentAction {
         return 
             g.V(connection)
                 .has("metaConcept", "ConnectionRule")
-                .property(StructuralModifierAttribute.ASSET_EXISTENCE, !deployed)
+                .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
                 .hasNext();
     }
 }

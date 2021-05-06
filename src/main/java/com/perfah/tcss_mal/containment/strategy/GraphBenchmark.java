@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.perfah.tcss_mal.containment.StructuralModifierAttribute;
+import com.perfah.tcss_mal.containment.ContainmentFlag;
 import com.perfah.tcss_mal.incident.Incident;
 import com.perfah.tcss_mal.util.GraphUtil;
 
@@ -27,13 +27,11 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.AbstractMap.SimpleEntry;
 
-import org.apache.logging.log4j.util.Activator;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.T;
 import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.mal_lang.corelang.test.Application;
 import org.mal_lang.corelang.test.User;
-import org.reflections.ReflectionUtils;
 
 import core.Asset;
 import core.AttackStep;
@@ -104,7 +102,7 @@ public class GraphBenchmark {
                     attackerId = assetId;
                 }
                 else{
-                    var modExistence = g.V(assetId).properties(StructuralModifierAttribute.ASSET_EXISTENCE);
+                    var modExistence = g.V(assetId).properties(ContainmentFlag.ASSET_EXISTENCE);
                     if(modExistence.hasNext() && modExistence.next().value().equals(false)){
                         if(verbose)
                             System.out.println("* Skipping asset: " + GraphUtil.getAssetRefStr(g, assetId));
@@ -128,7 +126,7 @@ public class GraphBenchmark {
             long assocId = (long)edge.id();
             String association = edge.label().split("\\.")[0];
 
-            var modExistence = g.E(assocId).properties(StructuralModifierAttribute.ASSOC_EXISTENCE);
+            var modExistence = g.E(assocId).properties(ContainmentFlag.ASSOC_EXISTENCE);
             if(modExistence.hasNext() && modExistence.next().value().equals(false))
             {
                 if(verbose)
@@ -136,7 +134,7 @@ public class GraphBenchmark {
                 continue;
             }
 
-            var modReplacement = g.E(assocId).properties(StructuralModifierAttribute.ASSOC_REPLACEMENT);
+            var modReplacement = g.E(assocId).properties(ContainmentFlag.ASSOC_REPLACEMENT);
             if(modReplacement.hasNext()) {
                 String replacementAssocType = (String)modReplacement.next().value();
                 if(!replacementAssocType.equalsIgnoreCase("")){

@@ -1,6 +1,6 @@
 package com.perfah.tcss_mal.containment.action;
 
-import com.perfah.tcss_mal.containment.StructuralModifierAttribute;
+import com.perfah.tcss_mal.containment.ContainmentFlag;
 import com.perfah.tcss_mal.util.GraphUtil;
 import com.perfah.tcss_mal.util.Role;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
@@ -39,13 +39,13 @@ public class StopService extends ContainmentAction {
                     __.identity(),
                     __.repeat(__.out("appExecutedApps")).until(__.out("appExecutedApps").count().is(0))
                 )
-                .property(StructuralModifierAttribute.ASSET_EXISTENCE, !deployed)
+                .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
                 .union(
                     __.identity(),
 
                     __.out("containedData", "transitData")
                       .where(__.out("containingApp", "transitApp").count().is(1))
-                      .property(StructuralModifierAttribute.ASSET_EXISTENCE, !deployed)
+                      .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
                 )
                 .hasNext();
     }

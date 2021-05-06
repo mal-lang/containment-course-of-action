@@ -1,6 +1,6 @@
 package com.perfah.tcss_mal.containment.action;
 
-import com.perfah.tcss_mal.containment.StructuralModifierAttribute;
+import com.perfah.tcss_mal.containment.ContainmentFlag;
 import com.perfah.tcss_mal.util.DefenseFlag;
 import com.perfah.tcss_mal.util.GraphUtil;
 import com.perfah.tcss_mal.util.Role;
@@ -35,10 +35,10 @@ public class SuspendHost extends ContainmentAction {
         return 
             g.V(host)
                 .has("metaConcept", "System")
-                .property(StructuralModifierAttribute.ASSET_EXISTENCE, !deployed)
+                .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
                 .union(
                     __.out("sysData")
-                      .property(StructuralModifierAttribute.ASSET_EXISTENCE, !deployed),
+                      .property(ContainmentFlag.ASSET_EXISTENCE, !deployed),
 
                     __.repeat(__.out("sysExecutedApps")).until(__.out("sysExecutedApps").count().is(0))
                       .union(
@@ -46,13 +46,13 @@ public class SuspendHost extends ContainmentAction {
                         __.repeat(__.out("appExecutedApps")).until(__.out("appExecutedApps").count().is(0))
                       )
                       .has("metaConcept", "Application")
-                      .property(StructuralModifierAttribute.ASSET_EXISTENCE, !deployed)
+                      .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
                       .union(
                         __.identity(),
     
                         __.out("containedData", "transitData")
                           .where(__.out("containingApp", "transitApp").count().is(1))
-                          .property(StructuralModifierAttribute.ASSET_EXISTENCE, !deployed)
+                          .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
                       )
                 )
                 .hasNext();

@@ -1,6 +1,6 @@
 package com.perfah.tcss_mal.containment.action;
 
-import com.perfah.tcss_mal.containment.StructuralModifierAttribute;
+import com.perfah.tcss_mal.containment.ContainmentFlag;
 import com.perfah.tcss_mal.util.DefenseFlag;
 import com.perfah.tcss_mal.util.GraphUtil;
 import com.perfah.tcss_mal.util.Role;
@@ -38,20 +38,20 @@ public class DropOutboundTraffic extends ContainmentAction {
                 .has("metaConcept", "Application")
                 .union(
                     __.outE("appConnections", "outgoingAppConnections")
-                      .property(StructuralModifierAttribute.ASSOC_REPLACEMENT, deployed ? "ingoingAppConnections" : "")
+                      .property(ContainmentFlag.ASSOC_REPLACEMENT, deployed ? "ingoingAppConnections" : "")
                       .inV()
                       .has("metaConcept", "ConnectionRule")
                       .outE("applications", "outApplications")
                       .filter(__.inV().hasId(sender))
-                      .property(StructuralModifierAttribute.ASSOC_REPLACEMENT, deployed ? "inApplications" : ""),
+                      .property(ContainmentFlag.ASSOC_REPLACEMENT, deployed ? "inApplications" : ""),
 
                     __.outE("netConnections", "outgoingNetConnections")
-                      .property(StructuralModifierAttribute.ASSOC_REPLACEMENT, deployed ? "ingoingNetConnections" : "")
+                      .property(ContainmentFlag.ASSOC_REPLACEMENT, deployed ? "ingoingNetConnections" : "")
                       .inV()
                       .has("metaConcept", "ConnectionRule")
                       .outE("networks", "outNetworks", "diodeOutNetworks")
                       .filter(__.inV().hasId(sender))
-                      .property(StructuralModifierAttribute.ASSOC_REPLACEMENT, deployed ? "inNetworks" : "")
+                      .property(ContainmentFlag.ASSOC_REPLACEMENT, deployed ? "inNetworks" : "")
                 )
                 .hasNext();           
     }
