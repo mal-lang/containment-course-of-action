@@ -15,7 +15,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSo
 public class SimulatedAnnealing {
     // Reference: startingTemp = 10, iterations = 10000, 0.9995
 
-    final double initialTemperature = 10000.0;
+    final double initialTemperature = 10000000.0;
     final double coolingRate = 0.98;
     final int maxIterations = 1000;
 
@@ -35,7 +35,7 @@ public class SimulatedAnnealing {
  
     private ArrayList<ArrayList<Object>> rows;
 
-    private final String format = "%1$-10s %2$-50s %3$-50s %4$-50s %5$-40s %6$-40s %7$-40s\n";
+    private final String format = "%1$-10s %2$-15s %3$-50s %4$-50s %5$-50s %6$-40s %7$-40s %8$-40s\n";
 
     public SimulatedAnnealing(GraphTraversalSource g,
                               List<Incident> activeIncidents,
@@ -58,6 +58,7 @@ public class SimulatedAnnealing {
     public void execute(GraphTraversalSource g) {
         ArrayList<Object> header = new ArrayList<Object>();
         header.add("It.");
+        header.add("Temperature");
         for(int i = 0; i < ContainmentStrategy.MAX_SIZE; i++)
             header.add("Action No. " + (i+1));
         header.add("Harm reduction");
@@ -68,7 +69,7 @@ public class SimulatedAnnealing {
         // Enforce containment action valuations in the beginning:
         latentActions.stream().forEach(action -> valuation.getContainmentActionConsequence(action.getInstanceIdentifier()));
 
-        while(t > 0.5 && currentIteration++ < 999999999){
+        while(t > 1 && currentIteration++ < 999999999){
             ContainmentStrategy backup = acceptedStrategy;
             acceptedStrategy = acceptedStrategy.neighbor(g, bestStrategyYet);
             if(acceptedStrategy == null)
@@ -103,6 +104,7 @@ public class SimulatedAnnealing {
 
             ArrayList<Object> row = new ArrayList<Object>();
             row.add(currentIteration);
+            row.add((int)t);
             for(int i = 0; i < ContainmentStrategy.MAX_SIZE; i++){
                 if(i < acceptedStrategy.getContainmentActions().size())
                     row.add(acceptedStrategy.getContainmentActions().get(i).getInstanceIdentifier());
@@ -126,7 +128,7 @@ public class SimulatedAnnealing {
     }
 
     public void printResults(GraphTraversalSource g){
-        List<ContainmentAction> bestActions = acceptedStrategy.getContainmentActions();
+        List<ContainmentAction> bestActions = bestStrategyYet.getContainmentActions();
         
         if(bestActions.size() > 0){
             System.out.println("\nPreferred containment strategy (perform actions chronologically):\n");
@@ -160,7 +162,16 @@ public class SimulatedAnnealing {
             //System.out.println(attackStep + ": " + preTTC + " -> " + postTTC);
 
             double consequence = valuation.getAttackStepConsequence(attackStep);
-            harmReduction += consequence * (UAF(preTTC) - UAF(postTTC));
+            double tmp = consequence * (UAF(preTTC) - UAF(postTTC));
+            harmReduction += tmp;
+
+            if(tmp < 0.0){
+                System.out.println("!");
+                System.out.println("Strategy: " + acceptedStrategy.toString());
+                System.out.println("Attack step" + attackStep);
+                System.out.println(preTTC + " -> " + postTTC);
+                System.out.println("Consequence: " + consequence);
+            }
         }
 
         double containmentCost = 0.0;

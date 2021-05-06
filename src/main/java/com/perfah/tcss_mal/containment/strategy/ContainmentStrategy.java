@@ -104,9 +104,24 @@ public class ContainmentStrategy {
             }
         }
         else{
-            // Avoid getting stuck by returning to the best configuration yet seen
             // Probability of entering: 1/(n+1)
-            return bestStrategyYet;
+            // Barrier avoidance
+
+            int k = rand.nextInt(2);
+
+            if(k == 0){
+                return bestStrategyYet;
+            }
+            else {
+                // Avoid getting stuck by returning to null strategy
+                
+                List<ContainmentAction> allActions = new ArrayList<ContainmentAction>();
+                allActions.addAll(activeActions);
+                allActions.addAll(latentActions);
+                Collections.shuffle(allActions);
+                
+                return new ContainmentStrategy(List.of(allActions.remove(0)), allActions, rand);
+            }
         }
     }
 
