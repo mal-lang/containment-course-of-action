@@ -9,8 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>tcss_mal</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/perfah/tcss-mal</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,88 +28,46 @@
   </properties>
 
   <dependencies>
-<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-<!-- https://mvnrepository.com/artifact/junit/junit -->
-<dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.13.2</version>
-    <scope>test</scope>
-</dependency>
-
-<dependency>
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter-api</artifactId>
-    <version>5.8.0-M1</version>
-</dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.apache.tinkerpop/gremlin-core -->
-<dependency>
-    <groupId>org.apache.tinkerpop</groupId>
-    <artifactId>gremlin-core</artifactId>
-    <version>3.4.10</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.tinkerpop/gremlin-driver -->
-<dependency>
-    <groupId>org.apache.tinkerpop</groupId>
-    <artifactId>gremlin-driver</artifactId>
-    <version>3.4.10</version>
-</dependency>
-<dependency>
-       <groupId>org.slf4j</groupId>
-       <artifactId>slf4j-api</artifactId>
-       <version>1.7.5</version>
-   </dependency>
-   <dependency>
-       <groupId>org.slf4j</groupId>
-       <artifactId>slf4j-log4j12</artifactId>
-       <version>1.7.5</version>
-   </dependency>
-  <!-- https://mvnrepository.com/artifact/org.jline/jline -->
-  <dependency>
-      <groupId>org.jline</groupId>
-      <artifactId>jline</artifactId>
-      <version>3.19.0</version>
-  </dependency>
-<!--     <dependency>
-        <groupId>org.mal-lang</groupId>
-        <artifactId>corelang</artifactId>
-        <version>0.1.0</version>
-    </dependency> -->
     <dependency>
-          <groupId>com.foreseeti</groupId>
-          <artifactId>corelib</artifactId>
-          <version>${corelib.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>com.foreseeti</groupId>
-          <artifactId>simulator</artifactId>
-          <version>${simulator.version}</version>
-        </dependency>
-    </dependencies>
+        <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
 
-  <repositories>
-    <repository>
-      <id>maven.foreseeti.com-release</id>
-      <url>s3://maven.foreseeti.com/release</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>maven.foreseeti.com-snapshot</id>
-      <url>s3://maven.foreseeti.com/snapshot</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.8.0-M1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tinkerpop</groupId>
+      <artifactId>gremlin-core</artifactId>
+      <version>3.4.10</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tinkerpop</groupId>
+      <artifactId>gremlin-driver</artifactId>
+      <version>3.4.10</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.5</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jline</groupId>
+        <artifactId>jline</artifactId>
+        <version>3.19.0</version>
+    </dependency>
+  </dependencies>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
