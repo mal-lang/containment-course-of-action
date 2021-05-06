@@ -3,7 +3,7 @@ package com.perfah.tcss_mal.containment.action;
 import java.lang.reflect.*;
 import java.util.List;
 
-import com.perfah.tcss_mal.containment.evaluation.GraphBenchmark;
+import com.perfah.tcss_mal.containment.strategy.GraphBenchmark;
 import com.perfah.tcss_mal.incident.Incident;
 import com.perfah.tcss_mal.util.Role;
 

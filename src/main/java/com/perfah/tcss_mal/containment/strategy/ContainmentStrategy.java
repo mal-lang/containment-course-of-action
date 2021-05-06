@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.perfah.tcss_mal.containment.action.ContainmentAction;
-import com.perfah.tcss_mal.containment.evaluation.GraphBenchmark;
 import com.perfah.tcss_mal.incident.Incident;
 
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;

@@ -1,4 +1,4 @@
-package com.perfah.tcss_mal.containment.evaluation;
+package com.perfah.tcss_mal.containment.strategy;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import com.perfah.tcss_mal.containment.action.BlockSpecificConnection;
 import com.perfah.tcss_mal.containment.action.ContainmentAction;
-import com.perfah.tcss_mal.containment.strategy.ContainmentStrategy;
 import com.perfah.tcss_mal.incident.Incident;
 
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;

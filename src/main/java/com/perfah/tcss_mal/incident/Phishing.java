@@ -16,7 +16,7 @@ import com.perfah.tcss_mal.util.SupportedIntervention;
 import org.apache.tinkerpop.gremlin.structure.T;
 import com.perfah.tcss_mal.incident.*;
 import com.perfah.tcss_mal.containment.action.*;
-import com.perfah.tcss_mal.containment.evaluation.*;
+import com.perfah.tcss_mal.containment.strategy.*;
 
 public class Phishing extends Incident {
     @Role private long attacker, user, identity, credentials;

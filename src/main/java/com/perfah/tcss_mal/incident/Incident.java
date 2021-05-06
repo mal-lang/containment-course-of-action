@@ -14,7 +14,7 @@ import java.lang.reflect.*;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 
 import com.perfah.tcss_mal.containment.action.*;
-import com.perfah.tcss_mal.containment.evaluation.*;
+import com.perfah.tcss_mal.containment.strategy.*;
 import com.perfah.tcss_mal.util.Role;
 import com.perfah.tcss_mal.util.SupportedIntervention;
 

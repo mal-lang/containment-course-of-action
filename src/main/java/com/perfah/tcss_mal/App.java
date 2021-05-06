@@ -28,7 +28,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.strategy.finalization.Refe
 import com.perfah.tcss_mal.util.GraphUtil;
 import com.perfah.tcss_mal.util.Sugar;
 import com.perfah.tcss_mal.containment.action.*;
-import com.perfah.tcss_mal.containment.evaluation.*;
+import com.perfah.tcss_mal.containment.strategy.*;
 import com.perfah.tcss_mal.incident.*;
 
 public class App 
