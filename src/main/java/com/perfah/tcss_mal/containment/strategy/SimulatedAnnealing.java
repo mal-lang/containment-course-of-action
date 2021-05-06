@@ -15,12 +15,13 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSo
 public class SimulatedAnnealing {
     // Reference: startingTemp = 10, iterations = 10000, 0.9995
 
-    final double initialTemperature = 40000.0;
-    final double coolingRate = 0.99;
+    final double initialTemperature = 10000.0;
+    final double coolingRate = 0.98;
     final int maxIterations = 1000;
 
     private int currentIteration;
-    private ContainmentStrategy strategy;
+    private ContainmentStrategy acceptedStrategy;
+    private ContainmentStrategy bestStrategyYet;
     private double t;
     private GraphBenchmark initialBenchmark;
     private Valuation valuation;
@@ -44,7 +45,8 @@ public class SimulatedAnnealing {
         this.latentActions = new ArrayList<ContainmentAction>(containmentActions);
 
         currentIteration = 0;
-        strategy = new ContainmentStrategy(latentActions);
+        acceptedStrategy = new ContainmentStrategy(latentActions);
+        bestStrategyYet = acceptedStrategy;
         t = initialTemperature;
         bestEnergy = 0;
 
@@ -67,11 +69,10 @@ public class SimulatedAnnealing {
         latentActions.stream().forEach(action -> valuation.getContainmentActionConsequence(action.getInstanceIdentifier()));
 
         while(t > 0.5 && currentIteration++ < 999999999){
-            ContainmentStrategy.Neighbor neighbor = strategy.neighbor();
-            if(neighbor == null)
+            ContainmentStrategy backup = acceptedStrategy;
+            acceptedStrategy = acceptedStrategy.neighbor(g, bestStrategyYet);
+            if(acceptedStrategy == null)
                 return;
-
-            neighbor.moveTo(g);
             
             double neighborEnergy = energy(g);
             if(neighborEnergy > bestEnergy){
@@ -80,10 +81,11 @@ public class SimulatedAnnealing {
                 acceptedHarmReduction = proposedHarmReduction;
                 acceptedContainmentCost = proposedContainmentCost;
                 acceptedEnergy = bestEnergy;
+                bestStrategyYet = acceptedStrategy;
             }
             else if(Math.exp((neighborEnergy - bestEnergy) / t) < Math.random()){
                 // Deny
-                neighbor.moveBack(g);
+                acceptedStrategy = backup;
             }
             else {
                 // Accept
@@ -102,8 +104,8 @@ public class SimulatedAnnealing {
             ArrayList<Object> row = new ArrayList<Object>();
             row.add(currentIteration);
             for(int i = 0; i < ContainmentStrategy.MAX_SIZE; i++){
-                if(i < strategy.getContainmentActions().size())
-                    row.add(strategy.getContainmentActions().get(i).getInstanceIdentifier());
+                if(i < acceptedStrategy.getContainmentActions().size())
+                    row.add(acceptedStrategy.getContainmentActions().get(i).getInstanceIdentifier());
                 else
                     row.add("NOP");
             }
@@ -124,7 +126,7 @@ public class SimulatedAnnealing {
     }
 
     public void printResults(GraphTraversalSource g){
-        List<ContainmentAction> bestActions = strategy.getContainmentActions();
+        List<ContainmentAction> bestActions = acceptedStrategy.getContainmentActions();
         
         if(bestActions.size() > 0){
             System.out.println("\nPreferred containment strategy (perform actions chronologically):\n");
@@ -140,7 +142,7 @@ public class SimulatedAnnealing {
     public double energy(GraphTraversalSource g){
         //System.out.println("Testing strategy: " + strategy);
 
-        GraphBenchmark benchmark = strategy.benchmark(g, activeIncidents);
+        GraphBenchmark benchmark = acceptedStrategy.benchmark(g, activeIncidents);
 
         double harmReduction = 0.0;
         for(String attackStep : initialBenchmark.ttcValues.keySet()) {
@@ -162,7 +164,7 @@ public class SimulatedAnnealing {
         }
 
         double containmentCost = 0.0;
-        for(ContainmentAction action : strategy.getContainmentActions()){
+        for(ContainmentAction action : acceptedStrategy.getContainmentActions()){
             containmentCost += valuation
                 .getContainmentActionConsequence(action.getInstanceIdentifier());
         }
