@@ -10,19 +10,19 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSo
 import com.perfah.tcss_mal.containment.action.*;
 import org.apache.tinkerpop.gremlin.structure.T;
 
-public class EndpointDenialOfService extends Incident {
+public class NetworkDenialOfService extends Incident {
     @Role private long attacker, target;
 
-    public EndpointDenialOfService(){}
+    public NetworkDenialOfService(){}
 
-    public EndpointDenialOfService(long attacker, long target) {
+    public NetworkDenialOfService(long attacker, long target) {
         this.attacker = attacker;
         this.target = target;
     }
 
     @Override
     public String getName() {
-        return "EndpointDenialOfService";
+        return "NetworkDenialOfService";
     }
 
     public String getDescription(GraphTraversalSource g){
@@ -48,7 +48,7 @@ public class EndpointDenialOfService extends Incident {
             .select("appTarget", "attacker")
             .by(T.id)
             .toStream()
-            .map(x -> (Incident) new EndpointDenialOfService(
+            .map(x -> (Incident) new NetworkDenialOfService(
                 (long)x.get("attacker"),
                 (long)x.get("appTarget")
             ))

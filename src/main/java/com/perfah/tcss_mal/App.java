@@ -53,7 +53,7 @@ public class App
             .withRemote(DriverRemoteConnection.using(cluster));
 
         latentIncidents = Stream
-            .of(new Phishing(), new EndpointDenialOfService(), new AnyIncident())
+            .of(new Phishing(), new NetworkDenialOfService(), new AnyIncident())
             .map(factory -> factory.instantiate(g))
             .flatMap(List::stream)
             .collect(Collectors.toList());
