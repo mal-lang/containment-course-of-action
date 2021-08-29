@@ -19,15 +19,14 @@ import com.perfah.tcss_mal.containment.action.*;
 import com.perfah.tcss_mal.containment.strategy.*;
 
 public class Phishing extends Incident {
-    @Role private long attacker, user, identity, credentials;
+    @Role private long attacker, user, identity;
 
     public Phishing() {}
 
-    private Phishing(long attacker, long user, long identity, long credentials){
+    private Phishing(long attacker, long user, long identity){
         this.attacker = attacker;
         this.user = user;
         this.identity = identity;
-        this.credentials = credentials;
     }
 
     @Override
@@ -51,23 +50,19 @@ public class Phishing extends Incident {
         return g.V()
             .has("metaConcept", "Attacker")
             .as("A")
-            .in("attemptSocialEngineering.attacker", "phishUser.attacker")
+            .in("phishUser.attacker", "attemptSocialEngineering.attacker")
             .has("metaConcept", "User")
             .as("U")
             .in("users")
             .has("metaConcept","Identity")
             .as("I")
-            .out("credentials")
-            .has("metaConcept", "Credentials")
-            .as("C")
-            .select("A", "U", "I", "C")
+            .select("A", "U", "I")
             .by(T.id)
             .toStream()
             .map((x) -> (Incident) new Phishing(
                 (long)x.get("A"),
                 (long)x.get("U"), 
-                (long)x.get("I"),
-                (long)x.get("C")
+                (long)x.get("I")
             ))
             .collect(Collectors.toList());
     }

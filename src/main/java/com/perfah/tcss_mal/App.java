@@ -159,7 +159,7 @@ public class App
                                 GraphUtil.getAssetRefStr(g, Long.parseLong(e.getKey().split("\\.")[0])) + "." + e.getKey().split("\\.")[1],
                                 Sugar.formatInfinity(e.getValue().doubleValue()),
                                 Sugar.formatInfinity(benchmark.ttcValues.getOrDefault(e.getKey(), Double.MAX_VALUE)),
-                                e.getValue().doubleValue() != benchmark.ttcValues.getOrDefault(e.getKey(), Double.MAX_VALUE) ? (table ? "POS" : "YES") : (table ? "NEG" : "")
+                                e.getValue().doubleValue() > benchmark.ttcValues.getOrDefault(e.getKey(), Double.MAX_VALUE) ? (table ? "POS" : "YES") : (table ? "NEG" : "")
                             })
                             .sorted((a, b) -> a[0].toString().compareTo(b[0].toString()))
                             .forEach(str -> System.out.format(table ? tableFormat : format, str));

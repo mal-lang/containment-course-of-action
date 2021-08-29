@@ -1,6 +1,6 @@
 package com.perfah.tcss_mal.containment.action;
 
-import com.perfah.tcss_mal.containment.ContainmentFlag;
+import com.perfah.tcss_mal.containment.CSAF;
 import com.perfah.tcss_mal.util.DefenseFlag;
 import com.perfah.tcss_mal.util.GraphUtil;
 import com.perfah.tcss_mal.util.Role;
@@ -35,10 +35,10 @@ public class SuspendHost extends ContainmentAction {
         return 
             g.V(host)
                 .has("metaConcept", "System")
-                .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
+                .property(CSAF.ASSET_DETACH, deployed)
                 .union(
                     __.out("sysData")
-                      .property(ContainmentFlag.ASSET_EXISTENCE, !deployed),
+                      .property(CSAF.ASSET_DETACH, deployed),
 
                     __.repeat(__.out("sysExecutedApps")).until(__.out("sysExecutedApps").count().is(0))
                       .union(
@@ -46,13 +46,13 @@ public class SuspendHost extends ContainmentAction {
                         __.repeat(__.out("appExecutedApps")).until(__.out("appExecutedApps").count().is(0))
                       )
                       .has("metaConcept", "Application")
-                      .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
+                      .property(CSAF.ASSET_DETACH, deployed)
                       .union(
                         __.identity(),
     
                         __.out("containedData", "transitData")
                           .where(__.out("containingApp", "transitApp").count().is(1))
-                          .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
+                          .property(CSAF.ASSET_DETACH, deployed)
                       )
                 )
                 .hasNext();

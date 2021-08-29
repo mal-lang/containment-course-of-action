@@ -131,7 +131,7 @@ public class SimulatedAnnealing {
         List<ContainmentAction> bestActions = bestStrategyYet.getContainmentActions();
         
         if(bestActions.size() > 0){
-            System.out.println("\nPreferred containment strategy (perform actions chronologically):\n");
+            System.out.println("Recommended containment strategy for indicated incidents:\n");
             for(int i = 0; i < bestActions.size(); i++){
                 System.out.println((i+1) + ". " + bestActions.get(i).getInstanceIdentifier() + " - " + bestActions.get(i).getDescription(g));
             }

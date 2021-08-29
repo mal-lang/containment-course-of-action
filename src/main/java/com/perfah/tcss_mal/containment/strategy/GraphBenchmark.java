@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.perfah.tcss_mal.containment.ContainmentFlag;
+import com.perfah.tcss_mal.containment.CSAF;
 import com.perfah.tcss_mal.incident.Incident;
 import com.perfah.tcss_mal.util.GraphUtil;
 
@@ -102,8 +102,8 @@ public class GraphBenchmark {
                     attackerId = assetId;
                 }
                 else{
-                    var modExistence = g.V(assetId).properties(ContainmentFlag.ASSET_EXISTENCE);
-                    if(modExistence.hasNext() && modExistence.next().value().equals(false)){
+                    var modExistence = g.V(assetId).properties(CSAF.ASSET_DETACH);
+                    if(modExistence.hasNext() && modExistence.next().value().equals(true)){
                         if(verbose)
                             System.out.println("* Skipping asset: " + GraphUtil.getAssetRefStr(g, assetId));
                         continue;
@@ -126,15 +126,15 @@ public class GraphBenchmark {
             long assocId = (long)edge.id();
             String association = edge.label().split("\\.")[0];
 
-            var modExistence = g.E(assocId).properties(ContainmentFlag.ASSOC_EXISTENCE);
-            if(modExistence.hasNext() && modExistence.next().value().equals(false))
+            var modExistence = g.E(assocId).properties(CSAF.ASSOC_DETACH);
+            if(modExistence.hasNext() && modExistence.next().value().equals(true))
             {
                 if(verbose)
                     System.out.println("* Skipping association: " + GraphUtil.getAssocRefStr(g, assocId));
                 continue;
             }
 
-            var modReplacement = g.E(assocId).properties(ContainmentFlag.ASSOC_REPLACEMENT);
+            var modReplacement = g.E(assocId).properties(CSAF.ASSOC_SWAP);
             if(modReplacement.hasNext()) {
                 String replacementAssocType = (String)modReplacement.next().value();
                 if(!replacementAssocType.equalsIgnoreCase("")){

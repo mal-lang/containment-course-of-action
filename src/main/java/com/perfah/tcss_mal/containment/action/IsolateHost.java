@@ -1,6 +1,6 @@
 package com.perfah.tcss_mal.containment.action;
 
-import com.perfah.tcss_mal.containment.ContainmentFlag;
+import com.perfah.tcss_mal.containment.CSAF;
 import com.perfah.tcss_mal.util.GraphUtil;
 import com.perfah.tcss_mal.util.Role;
 
@@ -58,14 +58,14 @@ public class IsolateHost extends ContainmentAction {
                      "outgoingAppConnections",
                      "networks",
                      "clientAccessNetworks")
-                .property(ContainmentFlag.ASSOC_EXISTENCE, !deployed)
+                .property(CSAF.ASSOC_DETACH, deployed)
                 .inV()
                 .outE("applications", 
                     "inApplications",
                     "outApplications",
                     "clientApplications")
                 .filter(__.inV().id().as("returnApp").select("apps").by(T.id).where(P.eq("returnApp")))
-                .property(ContainmentFlag.ASSOC_EXISTENCE, !deployed)
+                .property(CSAF.ASSOC_DETACH, deployed)
                 .hasNext();
     }
 }

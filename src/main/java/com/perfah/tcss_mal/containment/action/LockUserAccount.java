@@ -1,6 +1,6 @@
 package com.perfah.tcss_mal.containment.action;
 
-import com.perfah.tcss_mal.containment.ContainmentFlag;
+import com.perfah.tcss_mal.containment.CSAF;
 import com.perfah.tcss_mal.util.DefenseFlag;
 import com.perfah.tcss_mal.util.GraphUtil;
 import com.perfah.tcss_mal.util.Role;
@@ -37,10 +37,10 @@ public class LockUserAccount extends ContainmentAction {
             g.V(account)
                 .has("metaConcept", "Identity")
                 .union(
-                    __.property(ContainmentFlag.ASSET_EXISTENCE, !deployed),
+                    __.property(CSAF.ASSET_DETACH, deployed),
 
                     __.out("credentials")
-                      .property(ContainmentFlag.ASSET_EXISTENCE, !deployed)
+                      .property(CSAF.ASSET_DETACH, deployed)
                 )
                 .hasNext();
     }
