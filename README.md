@@ -1,6 +1,6 @@
 # containment-course-of-action
 
-A prototype implementation of the thesis work on **Containment Strategy Formalism in a Probabillistic Threat Modelling Framework**. This software allows for reasoning about containment strategies in MAL-based threat models. Recommendations for containment strategies can be tailored to a specific threat model, a organizational valuation and a set of indicated incidents. In the future, this work could be of interest for systematic and/or automatic approaches to containment or simply serve as a platform for proactive learning about how to contain various incidents that could occur.
+A prototype implementation of the thesis work on **Containment Strategy Formalism in a Probabillistic Threat Modelling Framework**. This software allows for reasoning about containment strategies in MAL-based threat models. Recommendations for containment strategies can be tailored to a specific threat model, an organizational valuation and a set of indicated incidents. In the future, this work could be of interest for systematic and/or automatic approaches to containment or simply serve as a platform for proactive learning about how to contain various threats that could emerge.
 
 Note, that this implementation currently supports coreLang-based threat models. 
 
