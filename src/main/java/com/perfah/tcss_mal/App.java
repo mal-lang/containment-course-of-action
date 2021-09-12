@@ -189,6 +189,7 @@ public class App
                 case "help": case "h":
                     System.out.println("Available commands: ");
                     System.out.println("- tentative/threats/t: List all indicated and latent incidents");
+                    System.out.println("- actions/a: List all viable containment actions");
                     System.out.println("- indicate/i <incident/incident-id>: Toggle a specific incident as indicatated");
                     System.out.println("- benchmark/b <action/action-id>: Benchmark a specific containment action");
                     System.out.println("- strategy/s: Find the best strategy");
