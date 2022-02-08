@@ -12,23 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.perfah.containment_course_of_action;
+package com.perfah.containment_course_of_action.containment;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
+public class CSAF {
+    public static final String ASSET_DETACH = "ASSET_EXISTENCE";
+    public static final String ASSOC_DETACH = "ASSOC_EXISTENCE";
+    public static final String ASSOC_SWAP = "ASSOC_REPLACEMENT";
 }

@@ -12,23 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.perfah.containment_course_of_action;
+package com.perfah.containment_course_of_action.util;
 
-import static org.junit.Assert.assertTrue;
+import org.jline.terminal.Terminal;
 
-import org.junit.Test;
-
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
+public class Sugar {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BOLD = "\u001B[1m";
+    public static final String ANSI_STRIKETHROUGH = "\u001B[2m";
 }

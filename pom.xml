@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.perfah</groupId>
-  <artifactId>tcss_mal</artifactId>
+  <artifactId>containment_course_of_action</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>tcss_mal</name>
-  <url>https://github.com/perfah/tcss-mal</url>
+  <name>containment-course-of-action</name>
+  <url>https://github.com/mal-lang/containment-course-of-action</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

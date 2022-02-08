@@ -12,23 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.perfah.containment_course_of_action;
+package com.perfah.containment_course_of_action.util;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+public class NamingConvention {
+    public static String getDefenseName(long assetId, String defenseName){
+        return assetId + "." + defenseName;
     }
+
 }

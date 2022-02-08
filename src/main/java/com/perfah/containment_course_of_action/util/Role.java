@@ -12,23 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.perfah.containment_course_of_action;
+package com.perfah.containment_course_of_action.util;
 
-import static org.junit.Assert.assertTrue;
+import java.lang.annotation.*;
+import java.lang.reflect.*;
 
-import org.junit.Test;
-
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Role {
+    String name() default "";
+    String assetType() default "";
+    String description() default "";
 }

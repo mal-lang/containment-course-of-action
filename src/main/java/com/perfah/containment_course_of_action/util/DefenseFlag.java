@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.perfah.containment_course_of_action;
+package com.perfah.containment_course_of_action.util;
 
-import static org.junit.Assert.assertTrue;
+public class DefenseFlag {
+    public static final String DISABLE = "disabled";
 
-import org.junit.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
+    // Potential:
+    public static final String OP_DISABLE = "OP_REMOVAL";
+    
+    public static final String OP_ASSOCIATION_SWAP = "OP_REPLACE";
+    public static final String OP_REDIRECT = "OP_REDIRECT";
+
+    /*
+        - Replace an edge: e.g. appConnection to ingoingAppConnection
+
+
+
+
+    */
 }
